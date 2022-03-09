@@ -5,9 +5,9 @@ const Navbar = () => {
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a className="navbar-brand" href="/">
-          Admin panel
-        </a>
+        <Link className="navbar-brand" to="/">
+          Quiz App Admin Panel
+        </Link>
         <button
           className="navbar-toggler"
           type="button"

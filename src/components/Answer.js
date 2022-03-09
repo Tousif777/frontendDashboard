@@ -1,6 +1,18 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect } from "react";
 
 const Answer = () => {
+  const [answer, setAnswer] = React.useState([]);
+  useEffect(() => {
+    axios
+      .get("http://localhost:3001/results")
+      .then((res) => {
+        setAnswer(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
   return (
     <div className="m-4">
       <div className="container">
@@ -24,20 +36,31 @@ const Answer = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>1</td>
-                        <td>Mark</td>
-                        <td>Otto@gmail.com</td>
-                        <td>10</td>
-                        <td>
-                          <a href="#" className="btn btn-sm btn-primary">
-                            <i className="fa fa-pencil">edit</i>
-                          </a>
-                          <a href="#" className="btn btn-sm btn-danger">
-                            <i className="fa fa-trash">delete</i>
-                          </a>
-                        </td>
-                      </tr>
+                      {answer.map((item, index) => (
+                        <tr key={index}>
+                          <td>{index + 1}</td>
+                          <td>{item.name}</td>
+                          <td>{item.email}</td>
+                          <td>{item.score}</td>
+                          <td>
+                            <button
+                              className="btn btn-primary"
+                              onClick={() => {
+                                axios
+                                  .delete(
+                                    `http://localhost:3001/results/${item._id}`
+                                  )
+                                  .then((res) => {
+                                    console.log(res);
+                                    window.location.reload();
+                                  });
+                              }}
+                            >
+                              Delete
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
                     </tbody>
                   </table>
                 </div>

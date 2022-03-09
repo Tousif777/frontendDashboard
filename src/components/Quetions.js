@@ -20,7 +20,6 @@ const Quetions = () => {
     //get data from api and set to state users
     axios.get("http://localhost:3001/questions").then((res) => {
       setQuetions(res.data);
-      console.log(res.data);
     });
   }, []);
 
@@ -180,6 +179,14 @@ function BasicUsage({ quetion }) {
               Cancel
             </Button>
             <Button
+              disabled={
+                !userData.question ||
+                !userData.answer ||
+                !userData.option1 ||
+                !userData.option2 ||
+                !userData.option3 ||
+                !userData.option4
+              }
               onClick={() => {
                 axios
                   .put(

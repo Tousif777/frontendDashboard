@@ -102,10 +102,32 @@ const Addquestion = () => {
             />
           </ModalBody>
           <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={onClose}>
+            <Button
+              colorScheme="blue"
+              mr={3}
+              onClick={() => {
+                onClose();
+                setUsers({
+                  question: "",
+                  answer: "",
+                  option1: "",
+                  option2: "",
+                  option3: "",
+                  option4: "",
+                });
+              }}
+            >
               Close
             </Button>
             <Button
+              disabled={
+                !users.question ||
+                !users.answer ||
+                !users.option1 ||
+                !users.option2 ||
+                !users.option3 ||
+                !users.option4
+              }
               variant="ghost"
               colorScheme="blue"
               onClick={() => {

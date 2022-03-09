@@ -21,7 +21,6 @@ const Userlist = () => {
     //get data from api and set to state users
     axios.get("http://localhost:3001/users").then((res) => {
       setUsers(res.data);
-      console.log(res.data);
     });
   }, []);
 

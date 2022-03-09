@@ -69,10 +69,24 @@ const Adduser = () => {
             />
           </ModalBody>
           <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={onClose}>
+            <Button
+              colorScheme="blue"
+              mr={3}
+              onClick={() => {
+                onClose();
+                setUsers({
+                  name: "",
+                  email: "",
+                  password: "",
+                });
+              }}
+            >
               Close
             </Button>
             <Button
+              disabled={
+                users.name === "" || users.email === "" || users.password === ""
+              }
               variant="ghost"
               colorScheme="blue"
               onClick={() => {
